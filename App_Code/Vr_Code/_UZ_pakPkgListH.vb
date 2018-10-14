@@ -227,6 +227,7 @@ Namespace SIS.PAK
           .Handle = "CT_VEHICLEREQUESTRAISED"
           .PartialOrFull = "PARTIAL"
           .GridLineStatus = 1
+          .SelectedList = "Coverted from Packing List No.: " & PkgNo
         End With
         tmp = SIS.VR.vrctVehicleRequest.InsertData(tmp)
       Next

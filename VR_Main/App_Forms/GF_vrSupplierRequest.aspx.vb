@@ -12,7 +12,7 @@ Partial Class GF_vrSupplierRequest
         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "", "alert('" & New JavaScriptSerializer().Serialize(ex.Message) & "');", True)
       End Try
     End If
-    If e.CommandName.ToLower = "approvewf".ToLower Then
+    If e.CommandName.ToLower = "approvewf".ToLower Then 'Covert to VR
       Try
         Dim SerialNo As Int32 = GVpakPkgListH.DataKeys(e.CommandArgument).Values("SerialNo")
         Dim PkgNo As Int32 = GVpakPkgListH.DataKeys(e.CommandArgument).Values("PkgNo")

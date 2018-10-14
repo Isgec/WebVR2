@@ -103,7 +103,7 @@
       <tr><td colspan="4" style="border-top: solid 1pt LightGrey" ></td></tr>
       <tr>
         <td class="alignright">
-          <b><asp:Label ID="L_IrefWeight" runat="server" ForeColor="#CC6633" Text="Iref. Weight [Kg] :" /></b>
+          <b><asp:Label ID="L_IrefWeight" runat="server" ForeColor="#CC6633" Text="Iref./Sub Item Weight [Kg] :" /></b>
         </td>
         <td>
           <asp:Label ID="F_IrefWeight"
@@ -128,6 +128,38 @@
         <td colspan="3">
           <asp:Label ID="Label2"
             Text='<%# Eval("QCClearedWt") %>'
+            CssClass = "dmypktxt"
+            runat="server" />
+        </td>
+      </tr>
+      <tr><td colspan="4" style="border-top: solid 1pt LightGrey" ></td></tr>
+      <tr>
+        <td class="alignright">
+          <b><asp:Label ID="Label7" runat="server" ForeColor="#CC6633" Text="Iref./Sub Item Quantity :" /></b>
+        </td>
+        <td>
+          <asp:Label ID="Label8"
+            Text='<%# Eval("PercentOfQuantity") %>'
+            CssClass = "dmypktxt"
+            runat="server" />
+        </td>
+        <td class="alignright">
+          <b><asp:Label ID="Label9" runat="server" ForeColor="#CC6633" Text="Despatched Quantity :" />&nbsp;</b>
+        </td>
+        <td>
+          <asp:Label ID="Label10"
+            Text='<%# Eval("DespatchedQty") %>'
+            CssClass = "dmypktxt"
+            runat="server" />
+        </td>
+      </tr>
+      <tr>
+        <td class="alignright">
+          <b><asp:Label ID="Label11" runat="server" ForeColor="#CC6633" Text="QC Cleared Quantity :" />&nbsp;</b>
+        </td>
+        <td colspan="3">
+          <asp:Label ID="Label12"
+            Text='<%# Eval("QCClearedQty") %>'
             CssClass = "dmypktxt"
             runat="server" />
         </td>

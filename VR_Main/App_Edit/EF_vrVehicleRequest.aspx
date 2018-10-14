@@ -984,13 +984,13 @@
           <ItemTemplate>
             <asp:Label ID="LabelItemReference" runat="server" ForeColor='<%# EVal("ForeColor") %>' Text='<%# Bind("ItemReference") %>'></asp:Label>
           </ItemTemplate>
-        <HeaderStyle CssClass="alignCenter" Width="100px" />
+        <HeaderStyle CssClass="alignCenter" Width="200px" />
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Sub Item" SortExpression="ActivityID">
           <ItemTemplate>
             <asp:Label ID="LabelActivityID" runat="server" ForeColor='<%# EVal("ForeColor") %>' Text='<%# Bind("ActivityID") %>'></asp:Label>
           </ItemTemplate>
-        <HeaderStyle CssClass="alignCenter" Width="50px" />
+        <HeaderStyle CssClass="alignCenter" Width="200px" />
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Quantity" SortExpression="Quantity">
           <ItemTemplate>
@@ -1013,7 +1013,7 @@
           <ItemStyle CssClass="alignCenter" />
         <HeaderStyle CssClass="alignCenter" Width="50px" />
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="Progress Percent" SortExpression="ProgressPercent">
+        <asp:TemplateField HeaderText="% Progress" SortExpression="ProgressPercent">
           <ItemTemplate>
             <asp:Label ID="LabelProgressPercent" runat="server" ForeColor='<%# EVal("ForeColor") %>' Text='<%# Bind("ProgressPercent") %>'></asp:Label>
           </ItemTemplate>

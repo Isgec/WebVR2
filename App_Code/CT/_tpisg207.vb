@@ -60,7 +60,7 @@ Namespace SIS.TPISG
     Public Property t_date() As String
       Get
         If Not _t_date = String.Empty Then
-          Return Convert.ToDateTime(_t_date).ToString("dd/MM/yyyy")
+          Return Convert.ToDateTime(_t_date).ToString("dd/MM/yyyy HH:mm:ss")
         End If
         Return _t_date
       End Get

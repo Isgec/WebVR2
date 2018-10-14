@@ -9,13 +9,16 @@ Namespace SIS.VR
   Partial Public Class vrVehicleRequest
     Public Function GetColor() As System.Drawing.Color
       Dim mRet As System.Drawing.Color = Drawing.Color.Black
-      If RequestStatus = RequestStates.Returned Then
-        mRet = Drawing.Color.Red
-      ElseIf RequestStatus >= RequestStates.UnderExecution And RequestStatus < RequestStates.VehicleArranged Then
-        mRet = Drawing.Color.DarkOrchid
-      ElseIf RequestStatus = RequestStates.VehicleArranged Then
-        mRet = Drawing.Color.Green
-      End If
+      Select Case RequestStatus
+        Case RequestStates.Free
+          mRet = Drawing.Color.Black
+        Case RequestStates.Returned
+          mRet = Drawing.Color.Red
+        Case RequestStates.VehicleArranged, RequestStates.VehiclePlaced
+          mRet = Drawing.Color.Green
+        Case Else
+          mRet = Drawing.Color.DarkOrchid
+      End Select
       Return mRet
     End Function
     Public Function GetVisible() As Boolean
@@ -29,12 +32,10 @@ Namespace SIS.VR
     Public ReadOnly Property Notification() As String
       Get
         Dim mRet As String = ""
-        '<li><b><u>Material Size</u></b></li>
         If RequestStatus = RequestStates.Returned Then
           mRet = "<li><b><u></u></b></li>" & Me.ReturnRemarks
         ElseIf RequestStatus >= RequestStates.Free Then
           If OverDimentionConsignement Then
-            'If ODCReasonID = String.Empty And Remarks = String.Empty Then
             If ODCReasonID = String.Empty Then
               mRet = "<img alt='warning' src='../../images/Error.gif' style='height:14px; width:14px' /><b>Specify Reason for ODC/Under Utilization</b>"
             Else
