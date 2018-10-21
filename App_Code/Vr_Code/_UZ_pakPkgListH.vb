@@ -157,15 +157,20 @@ Namespace SIS.PAK
     Public Shared Function ApproveWF(ByVal SerialNo As Int32, ByVal PkgNo As Int32) As SIS.PAK.pakPkgListH
       'Convert to Vehicle request
       Dim pkgH As SIS.PAK.pakPkgListH = pakPkgListHGetByID(SerialNo, PkgNo)
+      Dim oVar As SIS.QCM.qcmVendors = SIS.QCM.qcmVendors.qcmVendorsGetByID(pkgH.SupplierID)
+      If oVar Is Nothing Then oVar = SIS.QCM.qcmVendors.GetBPFromERP(pkgH.SupplierID)
+      Dim oPVar As SIS.QCM.qcmProjects = SIS.QCM.qcmProjects.qcmProjectsGetByID(pkgH.ProjectID)
+      If oPVar Is Nothing Then oPVar = SIS.QCM.qcmProjects.GetProjectFromERP(pkgH.ProjectID)
+
       Dim newVR As New SIS.VR.vrVehicleRequest
       With newVR
         .RequestNo = 0
         .RequestDescription = pkgH.FK_PAK_PkgListH_SerialNo.ProjectID
         .SupplierID = pkgH.SupplierID
-        .SupplierLocation = ""
+        .SupplierLocation = oVar.Address1.Trim & " " & oVar.Address2 & " " & oVar.Address3 & " " & oVar.Address4
         .ProjectID = pkgH.FK_PAK_PkgListH_SerialNo.ProjectID
         .ProjectType = IIf(pkgH.FK_PAK_PkgListH_SerialNo.PortRequired, "Export", "Domestic")
-        .DeliveryLocation = IIf(pkgH.FK_PAK_PkgListH_SerialNo.PortRequired, pkgH.ELOG_Ports8_Description, "")
+        .DeliveryLocation = oPVar.Address1.Trim & " " & oPVar.Address2 & " " & oPVar.Address3 & " " & oPVar.Address4 ' IIf(pkgH.FK_PAK_PkgListH_SerialNo.PortRequired, pkgH.ELOG_Ports8_Description, "")
         .ItemDescription = ""
         .MaterialSize = ""
         .SizeUnit = ""

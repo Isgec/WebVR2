@@ -34,6 +34,9 @@ Partial Class EF_vrVehicleRequest
     With F_FileUpload
       If .HasFile Then
         Dim tmpPath As String = ConfigurationManager.AppSettings("ActiveAttachmentPath")
+        If Not IO.Directory.Exists(tmpPath) Then
+          tmpPath = ConfigurationManager.AppSettings("TempAttachmentPath")
+        End If
         Dim tmpName As String = IO.Path.GetRandomFileName()
         .SaveAs(tmpPath & "\\" & tmpName)
         Dim RequestNo As Int32 = CType(FVvrVehicleRequest.FindControl("F_RequestNo"), TextBox).Text
@@ -60,12 +63,13 @@ Partial Class EF_vrVehicleRequest
     gvvrRequestAttachmentsCC.SetToolBar = TBLvrRequestAttachments
   End Sub
   Protected Sub GVvrRequestAttachments_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GVvrRequestAttachments.RowCommand
-    If e.CommandName.ToLower = "lgedit".ToLower Then
+    If e.CommandName.ToLower = "lgdelete".ToLower Then
       Try
         Dim RequestNo As Int32 = GVvrRequestAttachments.DataKeys(e.CommandArgument).Values("RequestNo")
         Dim SerialNo As Int32 = GVvrRequestAttachments.DataKeys(e.CommandArgument).Values("SerialNo")
-        Dim RedirectUrl As String = TBLvrRequestAttachments.EditUrl & "?RequestNo=" & RequestNo & "&SerialNo=" & SerialNo
-        Response.Redirect(RedirectUrl)
+        Dim tmp As SIS.VR.vrRequestAttachments = SIS.VR.vrRequestAttachments.vrRequestAttachmentsGetByID(RequestNo, SerialNo)
+        SIS.VR.vrRequestAttachments.UZ_vrRequestAttachmentsDelete(tmp)
+        GVvrRequestAttachments.DataBind()
       Catch ex As Exception
       End Try
     End If
